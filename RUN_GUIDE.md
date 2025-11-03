@@ -64,31 +64,46 @@ echo 'GEMINI_API_KEY=YOUR_ACTUAL_API_KEY' > .env
 
 **重要：** 后端依赖必须安装在虚拟环境中。
 
+**命令说明：**
+- `python3 -m venv gemini-langgraph-venv` 中，第一个 `venv` 是 Python 模块名，第二个 `gemini-langgraph-venv` 是创建的虚拟环境目录名
+- 我们使用 `gemini-langgraph-venv` 作为虚拟环境目录名，这样更清晰易识别
+- **只需创建一次**，如果 `gemini-langgraph-venv` 目录已存在，不需要重新创建
+
 ```bash
 cd backend
 
 # 如果使用 Python 3.12（通过 Homebrew 安装）
-/opt/homebrew/bin/python3.12 -m venv venv
+/opt/homebrew/bin/python3.12 -m venv gemini-langgraph-venv
 
 # 或者如果系统 Python 已经是 3.11+
-python3 -m venv venv
+python3 -m venv gemini-langgraph-venv
 ```
 
 ### 3. 激活虚拟环境并安装依赖
 
+**重要：** 
+- 依赖**只需安装一次**，只要虚拟环境目录存在，安装的包都会保留
+- 每次使用后端前，**只需激活虚拟环境**即可，不需要重新安装依赖
+
 ```bash
 cd backend
-source venv/bin/activate
+source gemini-langgraph-venv/bin/activate
 pip install .
 ```
 
 安装过程中会下载并安装所有依赖包（langgraph、langchain、google-genai 等）。
 
+**检查依赖是否已安装：**
+```bash
+source gemini-langgraph-venv/bin/activate
+pip list | grep langgraph  # 如果能看到 langgraph，说明已安装
+```
+
 ### 4. 启动后端开发服务器
 
 ```bash
 cd backend
-source venv/bin/activate  # 如果虚拟环境未激活
+source gemini-langgraph-venv/bin/activate  # 如果虚拟环境未激活
 langgraph dev
 ```
 
@@ -119,7 +134,7 @@ npm run dev
 **终端 2 - 后端：**
 ```bash
 cd backend
-source venv/bin/activate
+source gemini-langgraph-venv/bin/activate
 langgraph dev
 ```
 
@@ -136,10 +151,10 @@ cd backend
 echo 'GEMINI_API_KEY=YOUR_ACTUAL_API_KEY' > .env
 
 # 3. 创建虚拟环境
-/opt/homebrew/bin/python3.12 -m venv venv
+/opt/homebrew/bin/python3.12 -m venv gemini-langgraph-venv
 
 # 4. 激活虚拟环境并安装依赖
-source venv/bin/activate
+source gemini-langgraph-venv/bin/activate
 pip install .
 
 # 5. 安装前端依赖
@@ -151,7 +166,7 @@ npm run dev
 
 # 7. 启动后端（终端 2）
 cd ../backend
-source venv/bin/activate
+source gemini-langgraph-venv/bin/activate
 langgraph dev
 ```
 
@@ -188,8 +203,8 @@ error: externally-managed-environment
 **解决方法：**
 必须使用虚拟环境，不要直接在系统 Python 中安装：
 ```bash
-python3.12 -m venv venv
-source venv/bin/activate
+python3.12 -m venv gemini-langgraph-venv
+source gemini-langgraph-venv/bin/activate
 pip install .
 ```
 
@@ -223,7 +238,7 @@ npm run dev
 **后端：**
 ```bash
 cd backend
-source venv/bin/activate
+source gemini-langgraph-venv/bin/activate
 langgraph dev
 ```
 
